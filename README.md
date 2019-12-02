@@ -35,7 +35,7 @@ curl "http://localhost:8080/api/kafka-lag/time-remaining?group=my-group&topic=my
 
 ## Start server from docker image
 
-A docker image [cbornet/kafka_lag_start](https://hub.docker.com/r/cbornet/kafka_lag_stats) can be used to quickly have a server up and running.
+A docker image [cdiscount/kafka_lag_start](https://hub.docker.com/r/cdiscount/kafka_lag_stats) can be used to quickly have a server up and running.
 There is a `docker-compose.yml` at the root of the project that can be used to launch this image together with a Kafka and Zookeeper cluster.
 To use it, enter:
 
@@ -129,5 +129,5 @@ For further instructions on how to develop with JHipster, have a look at [Using 
 [using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.5.0/production/
 [running tests page]: https://www.jhipster.tech/documentation-archive/v6.5.0/running-tests/
 [code quality page]: https://www.jhipster.tech/documentation-archive/v6.5.0/code-quality/
-[github-image]: https://github.com/cbornet/kafka-lag-stats/workflows/Application%20CI/badge.svg
-[github-url]: https://github.com/cbornet/kafka-lag-stats/actions
+[github-image]: https://github.com/cdiscount/kafka-lag-stats/workflows/Application%20CI/badge.svg
+[github-url]: https://github.com/cdiscount/kafka-lag-stats/actions
