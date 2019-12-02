@@ -1,4 +1,6 @@
-[![Build Status][github-image]][github-url][![Docker Pulls](https://img.shields.io/docker/pulls/cdiscount/kafka-lag-stats.svg)](https://hub.docker.com/r/cdiscount/kafka-lag-stats/)
+[![Build Status][github-image]][github-url] [![Docker Pulls](https://img.shields.io/docker/pulls/cdiscount/kafka-lag-stats.svg)](https://hub.docker.com/r/cdiscount/kafka-lag-stats) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Cdiscount_kafka-lag-stats&metric=coverage)](https://sonarcloud.io/dashboard?id=Cdiscount_kafka-lag-stats)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Cdiscount_kafka-lag-stats&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=Cdiscount_kafka-lag-stats) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Cdiscount_kafka-lag-stats&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Cdiscount_kafka-lag-stats) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Cdiscount_kafka-lag-stats&metric=security_rating)](https://sonarcloud.io/dashboard?id=Cdiscount_kafka-lag-stats)
+
 
 # kafka-lag-stats
 
