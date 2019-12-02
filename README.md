@@ -1,4 +1,4 @@
-[![Build Status][github-image]][github-url] 
+[![Build Status][github-image]][github-url][![Docker Pulls](https://img.shields.io/docker/pulls/cdiscount/kafka-lag-stats.svg)](https://hub.docker.com/r/cdiscount/kafka-lag-stats/)
 
 # kafka-lag-stats
 

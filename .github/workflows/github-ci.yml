@@ -24,7 +24,7 @@ jobs:
                   if [ -n $SONAR_TOKEN ]; then
                       ./mvnw -ntp initialize sonar:sonar -Dsonar.projectKey=Cdiscount_kafka-lag-stats -Dsonar.organization=cdiscount -Dsonar.host.url=https://sonarcloud.io
                   else
-                      echo No SONAR_TOKEN, skipping...'
+                      echo No SONAR_TOKEN, skipping...
                   fi
             - name: Package application
               run: ./mvnw -ntp package -Pprod -DskipTests
