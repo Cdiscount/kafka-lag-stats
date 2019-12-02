@@ -20,7 +20,7 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-              run: '[[ $SONAR_TOKEN != "" ]] &&  ./mvnw -ntp initialize sonar:sonar -Dsonar.organization=cdiscount -Dsonar.host.url=https://sonarcloud.io || echo No SONAR_TOKEN, skipping...'
+              run: '[[ $SONAR_TOKEN != "" ]] &&  ./mvnw -ntp initialize sonar:sonar -Dsonar.projectKey=Cdiscount_kafka-lag-stats -Dsonar.organization=cdiscount -Dsonar.host.url=https://sonarcloud.io || echo No SONAR_TOKEN, skipping...'
             - name: Package application
               run: ./mvnw -ntp package -Pprod -DskipTests
             - name: Build and publish docker image
