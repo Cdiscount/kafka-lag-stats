@@ -35,7 +35,7 @@ curl "http://localhost:8080/api/kafka-lag/time-remaining?group=my-group&topic=my
 
 ## Start server from docker image
 
-A docker image [cdiscount/kafka_lag_start](https://hub.docker.com/r/cdiscount/kafka_lag_stats) can be used to quickly have a server up and running.
+A docker image [cdiscount/kafka-lag-start](https://hub.docker.com/r/cdiscount/kafka-lag-stats) can be used to quickly have a server up and running.
 There is a `docker-compose.yml` at the root of the project that can be used to launch this image together with a Kafka and Zookeeper cluster.
 To use it, enter:
 
