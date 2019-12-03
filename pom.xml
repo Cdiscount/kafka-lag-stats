@@ -699,6 +699,7 @@
                                 <importMappings>Problem=org.zalando.problem.Problem</importMappings>
                                 <skipValidateSpec>false</skipValidateSpec>
                                 <configOptions>
+                                    <useTags>true</useTags>
                                     <delegatePattern>true</delegatePattern>
                                     <title>kafka-lag-stats</title>
                                 </configOptions>

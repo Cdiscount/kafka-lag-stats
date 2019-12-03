@@ -18,27 +18,27 @@ import java.util.stream.IntStream;
 
 @Service
 @Profile("!test")
-public class ApiApiDelegateImpl implements ApiApiDelegate {
+public class KafkaLagStats implements KafkaLagStatsApiDelegate {
 
     private static final int NUMBER_OF_SAMPLING_INSTANTS = 10;
     private final KafkaLagService lagService;
     private final Clock clock;
     private final LagServiceMapper mapper;
 
-    public ApiApiDelegateImpl(KafkaLagService lagService, Clock clock, LagServiceMapper mapper) {
+    public KafkaLagStats(KafkaLagService lagService, Clock clock, LagServiceMapper mapper) {
         this.lagService = lagService;
         this.clock = clock;
         this.mapper = mapper;
     }
 
     @Override
-    public ResponseEntity<List<MessageLag>> getLagsUsingGET(String group, String topic, String key, Integer partition) {
+    public ResponseEntity<List<MessageLag>> getLags(String group, String topic, String key, Integer partition) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         return ResponseEntity.ok(mapper.messageLagstoApi(lagService.getConsumerLags(group, getPartitionFromParams(topic, partition, key), samplingInstants)));
     }
 
     @Override
-    public ResponseEntity<MessageLag> getMessagesToPublishTimestampUsingGET(String group, String topic, String key, Integer partition, String publishTimestamp) {
+    public ResponseEntity<MessageLag> getMessagesToPublishTimestamp(String group, String topic, String key, Integer partition, String publishTimestamp) {
         try {
             return ResponseEntity.ok(mapper.toApi(lagService.getMessagesToPublishTimestamp(group, getPartitionFromParams(topic, partition, key), publishTimestamp)));
         } catch (InterruptedException | ExecutionException e) {
@@ -47,31 +47,31 @@ public class ApiApiDelegateImpl implements ApiApiDelegate {
     }
 
     @Override
-    public ResponseEntity<Integer> getPartitionUsingGET(String key, String topic) {
+    public ResponseEntity<Integer> getPartition(String key, String topic) {
         return ResponseEntity.ok(lagService.getPartition(topic, key));
     }
 
     @Override
-    public ResponseEntity<SpeedStats> getSpeedStatsUsingGET(String group, String topic, String key, Integer partition) {
+    public ResponseEntity<SpeedStats> getSpeedStats(String group, String topic, String key, Integer partition) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         return ResponseEntity.ok(mapper.toApi(lagService.getSpeedStats(group, getPartitionFromParams(topic, partition, key), samplingInstants)));
     }
 
     @Override
-    public ResponseEntity<List<MessageSpeed>> getSpeedsUsingGET(String group, String topic, String key, Integer partition) {
+    public ResponseEntity<List<MessageSpeed>> getSpeeds(String group, String topic, String key, Integer partition) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         return ResponseEntity.ok(mapper.messageSpeedstoApi(lagService.getConsumerSpeeds(group,  getPartitionFromParams(topic, partition, key), samplingInstants)));
     }
 
     @Override
-    public ResponseEntity<TimeRemainingStats> getTimeRemainingStatsUsingGET(String group, String topic, String publishTimestamp) {
+    public ResponseEntity<TimeRemainingStats> getTimeRemainingStats(String group, String topic, String publishTimestamp) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         TimeRemainingStats timeRemainingStats = mapper.toApi(lagService.getTimeRemainingStats(group, topic, publishTimestamp, samplingInstants));
         return ResponseEntity.ok(timeRemainingStats);
     }
 
     @Override
-    public ResponseEntity<TimeRemaining> getTimeRemainingUsingGET(String group, String topic, String key, Integer partition, String publishTimestamp) {
+    public ResponseEntity<TimeRemaining> getTimeRemaining(String group, String topic, String key, Integer partition, String publishTimestamp) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         try {
             return ResponseEntity.ok(mapper.toApi(lagService.getTimeRemaining(group, getPartitionFromParams(topic, partition, key), publishTimestamp, samplingInstants)));
