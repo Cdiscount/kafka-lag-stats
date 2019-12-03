@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.mycompany.myapp"
     },
-    "jhipsterVersion": "6.5.0",
+    "jhipsterVersion": "6.5.1",
     "applicationType": "monolith",
     "baseName": "kafka_lag_stats",
     "packageName": "com.mycompany.myapp",
@@ -20,7 +20,7 @@
     "messageBroker": "kafka",
     "serviceDiscoveryType": false,
     "buildTool": "maven",
-    "enableSwaggerCodegen": false,
+    "enableSwaggerCodegen": true,
     "jwtSecretKey": "YWM4ZTQ1YTcwZGFhNWFhY2RiODZlYzA3ZTA5NzhjOGEyZjNlNmNlYmI0OTQ5N2ZkYzgzMmEwZjI2NDRjM2JmZGJmMTQyYmU2OTI5ZjU1MTQ1MjkzNWI1MWZjNzQzNzg5MDI2NWI0MDdhMTEwNTUxOGU5ODc3NjFiNGQ5NzZmYjc=",
     "embeddableLaunchScript": false,
     "useSass": true,
@@ -32,6 +32,7 @@
     "dtoSuffix": "DTO",
     "otherModules": [],
     "enableTranslation": false,
-    "blueprints": []
+    "blueprints": [],
+    "creationTimestamp": 1575383753460
   }
 }

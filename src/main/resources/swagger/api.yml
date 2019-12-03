@@ -1,0 +1,408 @@
+openapi: 3.0.0
+info:
+  description: kafka-lag-stats API documentation
+  version: 1.0.0
+  title: kafka_lag_stats API
+tags:
+  - name: kafka-lag-controller
+    description: Kafka Lag Controller
+paths:
+  /api/kafka-lag/lags:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getLags
+      operationId: getLagsUsingGET
+      parameters:
+        - name: group
+          in: query
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: key
+          required: false
+          schema:
+            type: string
+        - name: partition
+          in: query
+          description: partition
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MessageLag"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/kafka-lag/messages-remaining:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getMessagesToPublishTimestamp
+      operationId: getMessagesToPublishTimestampUsingGET
+      parameters:
+        - name: group
+          in: query
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: key
+          required: false
+          schema:
+            type: string
+        - name: partition
+          in: query
+          description: partition
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: publishTimestamp
+          in: query
+          description: publishTimestamp
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/MessageLag"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/kafka-lag/partition:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getPartition
+      operationId: getPartitionUsingGET
+      parameters:
+        - name: key
+          in: query
+          description: key
+          required: true
+          schema:
+            type: string
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: integer
+                format: int32
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/kafka-lag/speed-stats:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getSpeedStats
+      operationId: getSpeedStatsUsingGET
+      parameters:
+        - name: group
+          in: query
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: key
+          required: false
+          schema:
+            type: string
+        - name: partition
+          in: query
+          description: partition
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/SpeedStats"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/kafka-lag/speeds:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getSpeeds
+      operationId: getSpeedsUsingGET
+      parameters:
+        - name: group
+          in: query
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: key
+          required: false
+          schema:
+            type: string
+        - name: partition
+          in: query
+          description: partition
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MessageSpeed"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/kafka-lag/time-remaining:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getTimeRemaining
+      operationId: getTimeRemainingUsingGET
+      parameters:
+        - name: group
+          in: query
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: query
+          description: key
+          required: false
+          schema:
+            type: string
+        - name: partition
+          in: query
+          description: partition
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: publishTimestamp
+          in: query
+          description: publishTimestamp
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/TimeRemaining"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+  /api/kafka-lag/time-remaining-stats:
+    get:
+      tags:
+        - kafka-lag-controller
+      summary: getTimeRemainingStats
+      operationId: getTimeRemainingStatsUsingGET
+      parameters:
+        - name: group
+          in: query
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: publishTimestamp
+          in: query
+          description: publishTimestamp
+          required: false
+          schema:
+            type: string
+        - name: topic
+          in: query
+          description: topic
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/TimeRemainingStats"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      deprecated: false
+servers:
+  - url: //localhost:8080/
+components:
+  schemas:
+    DoubleStats:
+      type: object
+      properties:
+        mean:
+          type: number
+          format: double
+        stddev:
+          type: number
+          format: double
+        stddevPercent:
+          type: number
+          format: double
+      title: DoubleStats
+    MessageLag:
+      type: object
+      properties:
+        consumerOffset:
+          type: integer
+          format: int64
+        lagMessages:
+          type: integer
+          format: int64
+        producerOffset:
+          type: integer
+          format: int64
+        timestamp:
+          type: string
+          format: date-time
+      title: MessageLag
+    MessageSpeed:
+      type: object
+      properties:
+        lag:
+          $ref: "#/components/schemas/MessageLag"
+        speed:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+      title: MessageSpeed
+    SpeedStats:
+      type: object
+      properties:
+        meanSpeed:
+          $ref: "#/components/schemas/DoubleStats"
+        speeds:
+          type: array
+          items:
+            $ref: "#/components/schemas/MessageSpeed"
+      title: SpeedStats
+    TimeRemaining:
+      type: object
+      properties:
+        messageLag:
+          $ref: "#/components/schemas/MessageLag"
+        partition:
+          type: integer
+          format: int32
+        speedStats:
+          $ref: "#/components/schemas/SpeedStats"
+        timeRemaining:
+          type: number
+          format: double
+      title: TimeRemaining
+    TimeRemainingStats:
+      type: object
+      properties:
+        meanTimeOverPartitions:
+          $ref: "#/components/schemas/DoubleStats"
+        partitionTimesRemaining:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/TimeRemaining"
+      title: TimeRemainingStats
+

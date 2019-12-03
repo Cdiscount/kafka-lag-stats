@@ -90,15 +90,6 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
             .build();
         return create(ex, problem, request);
     }
-
-    @ExceptionHandler
-    public ResponseEntity<Problem> handleNoSuchElementException(NoSuchElementException ex, NativeWebRequest request) {
-        Problem problem = Problem.builder()
-            .withStatus(Status.NOT_FOUND)
-            .with(MESSAGE_KEY, ErrorConstants.ENTITY_NOT_FOUND_TYPE)
-            .build();
-        return create(ex, problem, request);
-    }
     @ExceptionHandler
     public ResponseEntity<Problem> handleBadRequestAlertException(BadRequestAlertException ex, NativeWebRequest request) {
         return create(ex, request, HeaderUtil.createFailureAlert(applicationName, false, ex.getEntityName(), ex.getErrorKey(), ex.getMessage()));
