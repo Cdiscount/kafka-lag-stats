@@ -3,39 +3,41 @@ info:
   description: kafka-lag-stats API documentation
   version: 1.0.0
   title: kafka_lag_stats
+servers:
+  - url: //localhost:8080/
 tags:
   - name: kafka-lag-stats
-    description: Kafka Lag Controller
+    description: Kafka Lag Stats
 paths:
   /api/kafka-lag/lags:
     get:
       tags:
         - kafka-lag-stats
-      summary: getLags
+      summary: get the last lags in time for a single consumer
       operationId: getLags
       parameters:
         - name: group
           in: query
-          description: group
+          description: the consumer group of the consumer
           required: true
           schema:
             type: string
         - name: key
           in: query
-          description: key
+          description: the partition key used to get the partition of the consumer  (give partition or key but not both)
           required: false
           schema:
             type: string
         - name: partition
           in: query
-          description: partition
+          description: the partition of the consumer (provide partition or key but not both)
           required: false
           schema:
             type: integer
             format: int32
         - name: topic
           in: query
-          description: topic
+          description: the topic subscribed by the consumer
           required: true
           schema:
             type: string
@@ -48,48 +50,42 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MessageLag"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
+
   /api/kafka-lag/messages-remaining:
     get:
       tags:
         - kafka-lag-stats
-      summary: getMessagesToPublishTimestamp
+      summary: get the number of messages that a consumer still has to consume to reach a message published at a given time
       operationId: getMessagesToPublishTimestamp
       parameters:
         - name: group
           in: query
-          description: group
+          description: the consumer group of the consumer
           required: true
           schema:
             type: string
         - name: key
           in: query
-          description: key
+          description: the partition key used to get the partition of the consumer  (give partition or key but not both)
           required: false
           schema:
             type: string
         - name: partition
           in: query
-          description: partition
+          description: the partition  of the consumer (provide partition or key but not both)
           required: false
           schema:
             type: integer
             format: int32
         - name: publishTimestamp
           in: query
-          description: publishTimestamp
+          description: the timestamp at which the message was published
           required: false
           schema:
             type: string
         - name: topic
           in: query
-          description: topic
+          description: the topic subscribed by the consumer
           required: true
           schema:
             type: string
@@ -100,29 +96,23 @@ paths:
             "*/*":
               schema:
                 $ref: "#/components/schemas/MessageLag"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
+
   /api/kafka-lag/partition:
     get:
       tags:
         - kafka-lag-stats
-      summary: getPartition
+      summary: get the partition for the given topic and key
       operationId: getPartition
       parameters:
         - name: key
           in: query
-          description: key
+          description: the key
           required: true
           schema:
             type: string
         - name: topic
           in: query
-          description: topic
+          description: the topic
           required: true
           schema:
             type: string
@@ -134,42 +124,36 @@ paths:
               schema:
                 type: integer
                 format: int32
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
+
   /api/kafka-lag/speed-stats:
     get:
       tags:
         - kafka-lag-stats
-      summary: getSpeedStats
+      summary: get the average consumption speed of a given consumer
       operationId: getSpeedStats
       parameters:
         - name: group
           in: query
-          description: group
+          description: the consumer group of the consumer
           required: true
           schema:
             type: string
         - name: key
           in: query
-          description: key
+          description: the partition key used to get the partition of the consumer  (give partition or key but not both)
           required: false
           schema:
             type: string
         - name: partition
           in: query
-          description: partition
+          description: the partition  of the consumer (provide partition or key but not both)
           required: false
           schema:
             type: integer
             format: int32
         - name: topic
           in: query
-          description: topic
+          description: the topic subscribed by the consumer
           required: true
           schema:
             type: string
@@ -180,42 +164,36 @@ paths:
             "*/*":
               schema:
                 $ref: "#/components/schemas/SpeedStats"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
+
   /api/kafka-lag/speeds:
     get:
       tags:
         - kafka-lag-stats
-      summary: getSpeeds
+      summary: get the last consumption speeds in time for a single consumer
       operationId: getSpeeds
       parameters:
         - name: group
           in: query
-          description: group
+          description: the consumer group of the consumer
           required: true
           schema:
             type: string
         - name: key
           in: query
-          description: key
+          description: the partition key used to get the partition of the consumer  (give partition or key but not both)
           required: false
           schema:
             type: string
         - name: partition
           in: query
-          description: partition
+          description: the partition  of the consumer (provide partition or key but not both)
           required: false
           schema:
             type: integer
             format: int32
         - name: topic
           in: query
-          description: topic
+          description: the topic subscribed by the consumer
           required: true
           schema:
             type: string
@@ -228,48 +206,42 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/MessageSpeed"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
+
   /api/kafka-lag/time-remaining:
     get:
       tags:
         - kafka-lag-stats
-      summary: getTimeRemaining
+      summary: get the time that a consumer still needs to consume a message published at a given time
       operationId: getTimeRemaining
       parameters:
         - name: group
           in: query
-          description: group
+          description: the consumer group of the consumer
           required: true
           schema:
             type: string
         - name: key
           in: query
-          description: key
+          description: the partition key used to get the partition of the consumer  (give partition or key but not both)
           required: false
           schema:
             type: string
         - name: partition
           in: query
-          description: partition
+          description: the partition  of the consumer (provide partition or key but not both)
           required: false
           schema:
             type: integer
             format: int32
         - name: publishTimestamp
           in: query
-          description: publishTimestamp
+          description: the timestamp at which the message was published
           required: false
           schema:
             type: string
         - name: topic
           in: query
-          description: topic
+          description: the topic subscribed by the consumer
           required: true
           schema:
             type: string
@@ -280,35 +252,29 @@ paths:
             "*/*":
               schema:
                 $ref: "#/components/schemas/TimeRemaining"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
+
   /api/kafka-lag/time-remaining-stats:
     get:
       tags:
         - kafka-lag-stats
-      summary: getTimeRemainingStats
+      summary: get the average time that a consumer still needs to consume a message published
       operationId: getTimeRemainingStats
       parameters:
         - name: group
           in: query
-          description: group
+          description: the consumer group of the consumer
           required: true
           schema:
             type: string
         - name: publishTimestamp
           in: query
-          description: publishTimestamp
+          description: the timestamp at which the message was published
           required: false
           schema:
             type: string
         - name: topic
           in: query
-          description: topic
+          description: the topic subscribed by the consumer
           required: true
           schema:
             type: string
@@ -319,15 +285,7 @@ paths:
             "*/*":
               schema:
                 $ref: "#/components/schemas/TimeRemainingStats"
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
-      deprecated: false
-servers:
-  - url: //localhost:8080/
+
 components:
   schemas:
     DoubleStats:

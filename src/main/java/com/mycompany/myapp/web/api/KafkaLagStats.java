@@ -31,12 +31,33 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
         this.mapper = mapper;
     }
 
+    /**
+     * GET /api/kafka-lag/lags : get the last lags in time for a single consumer
+     *
+     * @param group the consumer group of the consumer (required)
+     * @param topic the topic subscribed by the consumer (required)
+     * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
+     * @param partition the partition of the consumer (provide partition or key but not both) (optional)
+     * @return the response
+     * @see KafkaLagStatsApi#getLags
+     */
     @Override
     public ResponseEntity<List<MessageLag>> getLags(String group, String topic, String key, Integer partition) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         return ResponseEntity.ok(mapper.messageLagstoApi(lagService.getConsumerLags(group, getPartitionFromParams(topic, partition, key), samplingInstants)));
     }
 
+    /**
+     * GET /api/kafka-lag/messages-remaining : get the number of messages that a consumer still has to consume to reach a message published at a given time
+     *
+     * @param group the consumer group of the consumer (required)
+     * @param topic the topic subscribed by the consumer (required)
+     * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
+     * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
+     * @param publishTimestamp the timestamp at which the message was published (optional)
+     * @return the response
+     * @see KafkaLagStatsApi#getMessagesToPublishTimestamp
+     */
     @Override
     public ResponseEntity<MessageLag> getMessagesToPublishTimestamp(String group, String topic, String key, Integer partition, String publishTimestamp) {
         try {
@@ -46,23 +67,60 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
         }
     }
 
+    /**
+     * GET /api/kafka-lag/partition : get the partition for the given topic and key
+     *
+     * @param key the key (required)
+     * @param topic the topic (required)
+     * @return the response
+     * @see KafkaLagStatsApi#getPartition
+     */
     @Override
     public ResponseEntity<Integer> getPartition(String key, String topic) {
         return ResponseEntity.ok(lagService.getPartition(topic, key));
     }
 
+    /**
+     * GET /api/kafka-lag/speed-stats : get the average consumption speed of a given consumer
+     *
+     * @param group the consumer group of the consumer (required)
+     * @param topic the topic subscribed by the consumer (required)
+     * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
+     * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
+     * @return the response
+     * @see KafkaLagStatsApi#getSpeedStats
+     */
     @Override
     public ResponseEntity<SpeedStats> getSpeedStats(String group, String topic, String key, Integer partition) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         return ResponseEntity.ok(mapper.toApi(lagService.getSpeedStats(group, getPartitionFromParams(topic, partition, key), samplingInstants)));
     }
 
+    /**
+     * GET /api/kafka-lag/speeds : get the last consumption speeds in time for a single consumer
+     *
+     * @param group the consumer group of the consumer (required)
+     * @param topic the topic subscribed by the consumer (required)
+     * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
+     * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
+     * @return the response
+     * @see KafkaLagStatsApi#getSpeeds
+     */
     @Override
     public ResponseEntity<List<MessageSpeed>> getSpeeds(String group, String topic, String key, Integer partition) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
         return ResponseEntity.ok(mapper.messageSpeedstoApi(lagService.getConsumerSpeeds(group,  getPartitionFromParams(topic, partition, key), samplingInstants)));
     }
 
+    /**
+     * GET /api/kafka-lag/time-remaining-stats : get the average time that a consumer still needs to consume a message published
+     *
+     * @param group the consumer group of the consumer (required)
+     * @param topic the topic subscribed by the consumer (required)
+     * @param publishTimestamp the timestamp at which the message was published (optional)
+     * @return the response
+     * @see KafkaLagStatsApi#getTimeRemainingStats
+     */
     @Override
     public ResponseEntity<TimeRemainingStats> getTimeRemainingStats(String group, String topic, String publishTimestamp) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
@@ -70,6 +128,17 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
         return ResponseEntity.ok(timeRemainingStats);
     }
 
+    /**
+     * GET /api/kafka-lag/time-remaining : get the time that a consumer still needs to consume a message published at a given time
+     *
+     * @param group the consumer group of the consumer (required)
+     * @param topic the topic subscribed by the consumer (required)
+     * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
+     * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
+     * @param publishTimestamp the timestamp at which the message was published (optional)
+     * @return the response
+     * @see KafkaLagStatsApi#getTimeRemaining
+     */
     @Override
     public ResponseEntity<TimeRemaining> getTimeRemaining(String group, String topic, String key, Integer partition, String publishTimestamp) {
         List<Instant> samplingInstants = getSamplingInstantsFromNow(NUMBER_OF_SAMPLING_INSTANTS);
