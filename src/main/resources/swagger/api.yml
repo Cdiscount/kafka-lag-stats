@@ -43,7 +43,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the last lags of the consumer
           content:
             "*/*":
               schema:
@@ -91,7 +91,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the number of messages that still have to be consumed
           content:
             "*/*":
               schema:
@@ -118,7 +118,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the partition number
           content:
             "*/*":
               schema:
@@ -159,7 +159,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the average speed of the consumer
           content:
             "*/*":
               schema:
@@ -199,7 +199,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the last consumption speeds of the consumer
           content:
             "*/*":
               schema:
@@ -247,7 +247,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the time that the consumer still needs to consume the message
           content:
             "*/*":
               schema:
@@ -280,7 +280,7 @@ paths:
             type: string
       responses:
         "200":
-          description: OK
+          description: the time that the consumer still needs to consume the message
           content:
             "*/*":
               schema:

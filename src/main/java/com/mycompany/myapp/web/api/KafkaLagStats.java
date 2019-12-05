@@ -38,7 +38,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      * @param topic the topic subscribed by the consumer (required)
      * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
      * @param partition the partition of the consumer (provide partition or key but not both) (optional)
-     * @return the response
+     * @return the last lags of the consumer (status code 200)
      * @see KafkaLagStatsApi#getLags
      */
     @Override
@@ -55,7 +55,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
      * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
      * @param publishTimestamp the timestamp at which the message was published (optional)
-     * @return the response
+     * @return the number of messages that still have to be consumed (status code 200)
      * @see KafkaLagStatsApi#getMessagesToPublishTimestamp
      */
     @Override
@@ -72,7 +72,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      *
      * @param key the key (required)
      * @param topic the topic (required)
-     * @return the response
+     * @return the partition number (status code 200)
      * @see KafkaLagStatsApi#getPartition
      */
     @Override
@@ -87,7 +87,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      * @param topic the topic subscribed by the consumer (required)
      * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
      * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
-     * @return the response
+     * @return the average speed of the consumer (status code 200)
      * @see KafkaLagStatsApi#getSpeedStats
      */
     @Override
@@ -103,7 +103,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      * @param topic the topic subscribed by the consumer (required)
      * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
      * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
-     * @return the response
+     * @return the last consumption speeds of the consumer (status code 200)
      * @see KafkaLagStatsApi#getSpeeds
      */
     @Override
@@ -118,7 +118,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      * @param group the consumer group of the consumer (required)
      * @param topic the topic subscribed by the consumer (required)
      * @param publishTimestamp the timestamp at which the message was published (optional)
-     * @return the response
+     * @return the time that the consumer still needs to consume the message (status code 200)
      * @see KafkaLagStatsApi#getTimeRemainingStats
      */
     @Override
@@ -136,7 +136,7 @@ public class KafkaLagStats implements KafkaLagStatsApiDelegate {
      * @param key the partition key used to get the partition of the consumer  (give partition or key but not both) (optional)
      * @param partition the partition  of the consumer (provide partition or key but not both) (optional)
      * @param publishTimestamp the timestamp at which the message was published (optional)
-     * @return the response
+     * @return the time that the consumer still needs to consume the message (status code 200)
      * @see KafkaLagStatsApi#getTimeRemaining
      */
     @Override
