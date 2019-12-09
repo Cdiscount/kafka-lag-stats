@@ -178,7 +178,6 @@ public class KafkaLagService {
                 return new MessageLag(offset, producerOffset, producerOffset - offset, publishInstant);
             })
             .orElseThrow(() -> new KafkaLagService.OffsetNotFoundException("Couldn't find consumer offset for partition "  + topicPartition.toString()));
-
     }
 
     public TimeRemaining getTimeRemaining(String group, TopicPartition partition, String publishTimestamp, List<Instant> samplingInstants) throws ExecutionException, InterruptedException {

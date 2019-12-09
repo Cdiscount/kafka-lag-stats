@@ -4,12 +4,19 @@ info:
   version: 1.0.0
   title: kafka_lag_stats
 servers:
-  - url: //localhost:8080/
+  - url: http://localhost:8080/api
+    description: Development server
+  - url: https://localhost:8080/api
+    description: Development server with TLS Profile
 tags:
   - name: kafka-lag-stats
     description: Kafka Lag Stats
+security:
+  - jwt: []
+  - basic: []
+
 paths:
-  /api/kafka-lag/lags:
+  /kafka-lag/lags:
     get:
       tags:
         - kafka-lag-stats
@@ -45,13 +52,15 @@ paths:
         "200":
           description: the last lags of the consumer
           content:
-            "*/*":
+            "application/json":
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/MessageLag"
+        "default":
+          $ref: "#/components/responses/Problem"
 
-  /api/kafka-lag/messages-remaining:
+  /kafka-lag/messages-remaining:
     get:
       tags:
         - kafka-lag-stats
@@ -93,11 +102,13 @@ paths:
         "200":
           description: the number of messages that still have to be consumed
           content:
-            "*/*":
+            "application/json":
               schema:
                 $ref: "#/components/schemas/MessageLag"
+        "default":
+          $ref: "#/components/responses/Problem"
 
-  /api/kafka-lag/partition:
+  /kafka-lag/partition:
     get:
       tags:
         - kafka-lag-stats
@@ -120,12 +131,14 @@ paths:
         "200":
           description: the partition number
           content:
-            "*/*":
+            "application/json":
               schema:
                 type: integer
                 format: int32
+        "default":
+          $ref: "#/components/responses/Problem"
 
-  /api/kafka-lag/speed-stats:
+  /kafka-lag/speed-stats:
     get:
       tags:
         - kafka-lag-stats
@@ -161,11 +174,13 @@ paths:
         "200":
           description: the average speed of the consumer
           content:
-            "*/*":
+            "application/json":
               schema:
                 $ref: "#/components/schemas/SpeedStats"
+        "default":
+          $ref: "#/components/responses/Problem"
 
-  /api/kafka-lag/speeds:
+  /kafka-lag/speeds:
     get:
       tags:
         - kafka-lag-stats
@@ -201,13 +216,15 @@ paths:
         "200":
           description: the last consumption speeds of the consumer
           content:
-            "*/*":
+            "application/json":
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/MessageSpeed"
+        "default":
+          $ref: "#/components/responses/Problem"
 
-  /api/kafka-lag/time-remaining:
+  /kafka-lag/time-remaining:
     get:
       tags:
         - kafka-lag-stats
@@ -249,11 +266,13 @@ paths:
         "200":
           description: the time that the consumer still needs to consume the message
           content:
-            "*/*":
+            "application/json":
               schema:
                 $ref: "#/components/schemas/TimeRemaining"
+        "default":
+          $ref: "#/components/responses/Problem"
 
-  /api/kafka-lag/time-remaining-stats:
+  /kafka-lag/time-remaining-stats:
     get:
       tags:
         - kafka-lag-stats
@@ -282,11 +301,29 @@ paths:
         "200":
           description: the time that the consumer still needs to consume the message
           content:
-            "*/*":
+            "application/json":
               schema:
                 $ref: "#/components/schemas/TimeRemainingStats"
+        "default":
+          $ref: "#/components/responses/Problem"
 
 components:
+  securitySchemes:
+    jwt:
+      type: http
+      description: JWT Authentication
+      scheme: bearer
+      bearerFormat: JWT
+    basic:
+      type: http
+      scheme: basic
+  responses:
+    Problem:
+      description: error occurred - see status code and problem object for more information.
+      content:
+        "application/problem+json":
+          schema:
+            $ref: 'https://opensource.zalando.com/problem/schema.yaml#/Problem'
   schemas:
     DoubleStats:
       type: object
@@ -363,4 +400,3 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/TimeRemaining"
       title: TimeRemainingStats
-
