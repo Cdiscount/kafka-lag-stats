@@ -316,6 +316,7 @@ components:
       bearerFormat: JWT
     basic:
       type: http
+      description: Basic Authentication
       scheme: basic
   responses:
     Problem:
