@@ -13,7 +13,7 @@ and the producer uses a partition key, then the kafka-lag-stats endpoints can be
 
 Example for topic `my-topic`, consumer group `my-group`, message key `my-key`:
 ```shell script
-curl "http://localhost:8080/api/kafka-lag/time-remaining?group=my-group&topic=my-topic&key=my-key&publishTimestamp=2019-11-28T10:02:57.574Z"
+curl -u admin:admin "http://localhost:8080/api/kafka-lag/time-remaining?group=my-group&topic=my-topic&key=my-key&publishTimestamp=2019-11-28T10:02:57.574Z"
 ```
 ```json
 {
